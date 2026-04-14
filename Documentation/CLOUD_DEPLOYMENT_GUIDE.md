@@ -245,3 +245,84 @@ Never put these in Vercel frontend env vars:
 Only backend env vars should contain private values.
 
 ---
+<<<<<<< HEAD
+=======
+
+## 9. Production Environment Checklist
+
+Before going live, verify:
+
+1. ADMIN_KEY is strong and private
+2. DB credentials are private and only in cloud env vars
+3. .env files are not committed to Git
+4. Frontend and backend are HTTPS only
+5. Health endpoint works
+6. CORS allows only your real frontend domain
+7. Admin actions (create/edit/delete) work with valid key only
+
+---
+
+## 10. Common Deployment Errors and Fixes
+
+### Error: CORS blocked
+
+Fix:
+
+- FRONTEND_ORIGIN in backend must exactly match frontend URL
+- Include protocol, for example https://app.example.com
+
+### Error: Frontend loads but no data
+
+Fix:
+
+- Check API_BASE_URL in frontend cloud env vars
+- Confirm backend URL is public and healthy
+
+### Error: Backend cannot connect to DB
+
+Fix:
+
+- Recheck DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME
+- Check if DB provider requires IP allowlist or SSL options
+
+### Error: 401 on admin actions
+
+Fix:
+
+- Use exact ADMIN_KEY from backend environment
+
+### Error: Build passes locally but fails in cloud
+
+Fix:
+
+- Confirm root directory is correct
+- Confirm build and output paths are correct
+- Confirm environment variables are set in cloud dashboard
+
+---
+
+## 11. Suggested Release Flow (Simple)
+
+For each release:
+
+1. Test locally first
+2. Push to GitHub main branch
+3. Cloud auto-deploy runs
+4. Check frontend page and backend health
+5. Smoke test Home, Map, and Admin
+
+---
+
+## 12. Security Rules for This Project
+
+Never put these in frontend env:
+
+- DB credentials
+- ADMIN_KEY
+- Any private secrets
+
+Frontend env values are public by nature.
+Only backend cloud env should contain real secrets.
+
+---
+>>>>>>> cfa99719372707c85d951b08f81f56ac5708b871
