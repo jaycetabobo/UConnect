@@ -251,5 +251,3 @@ Frontend env values are public by nature.
 Only backend cloud env should contain real secrets.
 
 ---
-
-If you want, a third document can be added next for rollback and incident recovery (what to do if deployment breaks in production).
