@@ -1,5 +1,6 @@
 import mysql from "mysql2/promise";
-import pool, { dbConfig } from "../config/db";
+import type { ConnectionOptions } from "mysql2";
+import pool, { dbConfig, dbName } from "../config/db.js";
 
 const defaultLocations = [
   [
@@ -202,16 +203,17 @@ const defaultAnnouncements = [
 ];
 
 export async function bootstrapDatabase() {
-  const adminConnection = await mysql.createConnection({
-    host: dbConfig.host,
-    port: dbConfig.port,
-    user: dbConfig.user,
-    password: dbConfig.password,
-  });
+  const adminConnection =
+    typeof dbConfig === "string"
+      ? await mysql.createConnection(dbConfig)
+      : await mysql.createConnection({
+          host: dbConfig.host,
+          port: dbConfig.port,
+          user: dbConfig.user,
+          password: dbConfig.password,
+        } satisfies ConnectionOptions);
 
-  await adminConnection.query(
-    `CREATE DATABASE IF NOT EXISTS \`${dbConfig.database}\``,
-  );
+  await adminConnection.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\``);
   await adminConnection.end();
 
   await pool.query(`

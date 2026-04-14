@@ -36,7 +36,7 @@ try {
   env = {};
 }
 
-const apiBaseUrl = env.API_BASE_URL || '/api';
+const apiBaseUrl = process.env.API_BASE_URL || env.API_BASE_URL || '/api';
 const escapedApiBaseUrl = JSON.stringify(apiBaseUrl);
 
 const output = `window.__env = Object.assign({}, window.__env, { API_BASE_URL: ${escapedApiBaseUrl} });\n`;

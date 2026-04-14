@@ -2,24 +2,31 @@ import "dotenv/config";
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { bootstrapDatabase } from "./db/bootstrap";
-import adminRoute from "./routes/admin.route";
-import { requireEnv, requireEnvNumber } from "./config/env";
-import publicRoute from "./routes/public.route";
+import { bootstrapDatabase } from "./db/bootstrap.js";
+import adminRoute from "./routes/admin.route.js";
+import {
+  requireEnv,
+  requireEnvNumber,
+  requireEnvOptional,
+} from "./config/env.js";
+import publicRoute from "./routes/public.route.js";
 
 const app = new Hono();
-const FRONTEND_ORIGIN = requireEnv("FRONTEND_ORIGIN");
 const PORT = requireEnvNumber("PORT");
-const PUBLIC_BASE_URL = requireEnv("PUBLIC_BASE_URL");
+const FRONTEND_ORIGIN = requireEnvOptional("FRONTEND_ORIGIN");
+const PUBLIC_BASE_URL =
+  requireEnvOptional("RENDER_EXTERNAL_URL") ??
+  requireEnvOptional("PUBLIC_BASE_URL") ??
+  `http://localhost:${PORT}`;
 
 app.use(
   "*",
   cors({
-    origin: FRONTEND_ORIGIN,
+    origin: FRONTEND_ORIGIN ?? "*",
     allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization", "x-admin-key"],
     maxAge: 600,
-    credentials: true,
+    credentials: Boolean(FRONTEND_ORIGIN),
   }),
 );
 

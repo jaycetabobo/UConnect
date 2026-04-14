@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import {
   getAnnouncements,
   getLocations,
-} from "../controllers/public.controller";
+} from "../controllers/public.controller.js";
 
 const publicRoute = new Hono();
 

@@ -1,7 +1,7 @@
 import type { Context } from "hono";
-import pool from "../config/db";
-import type { AnnouncementModel } from "../models/announcement.model";
-import type { LocationModel } from "../models/location.model";
+import pool from "../config/db.js";
+import type { AnnouncementModel } from "../models/announcement.model.js";
+import type { LocationModel } from "../models/location.model.js";
 
 export async function getLocations(context: Context) {
   try {

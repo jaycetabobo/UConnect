@@ -1,5 +1,5 @@
 import type { MiddlewareHandler } from "hono";
-import { requireEnv } from "../config/env";
+import { requireEnv } from "../config/env.js";
 
 const ADMIN_KEY = requireEnv("ADMIN_KEY");
 

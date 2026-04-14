@@ -1,10 +1,10 @@
 import type { Context } from "hono";
 import type { ResultSetHeader } from "mysql2";
-import pool from "../config/db";
+import pool from "../config/db.js";
 import type {
   AnnouncementModel,
   AnnouncementPayload,
-} from "../models/announcement.model";
+} from "../models/announcement.model.js";
 
 function validatePayload(payload: Partial<AnnouncementPayload>) {
   if (!payload.title || !payload.title.trim()) {

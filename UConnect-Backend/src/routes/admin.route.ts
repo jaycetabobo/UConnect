@@ -3,8 +3,8 @@ import {
   createAnnouncement,
   deleteAnnouncement,
   updateAnnouncement,
-} from "../controllers/admin.controller";
-import { requireAdminAuth } from "../middleware/admin-auth";
+} from "../controllers/admin.controller.js";
+import { requireAdminAuth } from "../middleware/admin-auth.js";
 
 const adminRoute = new Hono();
 
