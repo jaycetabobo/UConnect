@@ -106,7 +106,7 @@
       </article>
     } @else {
       <div class="announcement-list">
-        @for (item of announcements(); track item.id) {
+        @for (item of sortedAnnouncements(); track item.id) {
           <article class="card list-item">
             <div class="row-top">
               <h4>{{ item.title }}</h4>

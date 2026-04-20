@@ -18,6 +18,13 @@ export class AdminComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
 
   protected readonly announcements = signal<Announcement[]>([]);
+  // Sorted announcements by priority: URGENT > HIGH > NORMAL > LOW
+  protected readonly sortedAnnouncements = computed(() => {
+    const priorityOrder = { URGENT: 0, HIGH: 1, NORMAL: 2, LOW: 3 };
+    return [...this.announcements()].sort(
+      (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority],
+    );
+  });
   protected readonly editingId = signal<number | null>(null);
   protected readonly isFormExpanded = signal(false);
   protected readonly loading = signal(false);

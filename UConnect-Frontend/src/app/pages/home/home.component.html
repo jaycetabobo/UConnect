@@ -19,7 +19,7 @@
   </section>
 } @else {
   <section class="announcement-list">
-    @for (announcement of announcements(); track announcement.id) {
+    @for (announcement of sortedAnnouncements(); track announcement.id) {
       <article
         class="announcement-card"
         [class]="'priority-' + announcement.priority.toLowerCase()"
@@ -44,24 +44,7 @@
   </section>
 }
 
-<section class="stats-grid">
-  <article class="card stat">
-    <strong>{{ collegeCount() }}</strong>
-    <span>Colleges</span>
-  </article>
-  <article class="card stat">
-    <strong>{{ announcements().length }}</strong>
-    <span>Announcements</span>
-  </article>
-  <article class="card stat">
-    <strong>BSIT</strong>
-    <span>Your Program</span>
-  </article>
-  <article class="card stat">
-    <strong>2-2</strong>
-    <span>Your Section</span>
-  </article>
-</section>
+<!-- stats-grid section removed as requested -->
 
 <section class="section-header">
   <h3><i class="bi bi-telephone"></i> Campus Offices & Contacts</h3>

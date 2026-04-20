@@ -16,6 +16,13 @@ export class HomeComponent implements OnInit {
   private readonly locationsApi = inject(LocationsApiService);
 
   protected readonly announcements = signal<Announcement[]>([]);
+  // Sorted announcements by priority: URGENT > HIGH > NORMAL > LOW
+  protected readonly sortedAnnouncements = computed(() => {
+    const priorityOrder = { URGENT: 0, HIGH: 1, NORMAL: 2, LOW: 3 };
+    return [...this.announcements()].sort(
+      (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority],
+    );
+  });
   protected readonly locations = signal<Location[]>([]);
   protected readonly loading = signal(false);
 
